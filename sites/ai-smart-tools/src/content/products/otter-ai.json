@@ -1,0 +1,42 @@
+{
+  "name": "Otter.ai",
+  "slug": "otter-ai",
+  "brand": "Otter.ai",
+  "category": "ai-meeting-notes",
+  "url": "https://otter.ai",
+  "affiliateUrl": "https://otter.ai/?via=aismarttools",
+  "pricing": {
+    "starting": 16.99,
+    "currency": "USD",
+    "hasFreeTier": true
+  },
+  "rating": 4.6,
+  "g2Score": 4.5,
+  "description": "AI meeting note taker that joins Zoom, Meet, and Teams calls to transcribe, summarize, and extract action items automatically.",
+  "bestFor": [
+    "remote teams on Zoom",
+    "sales and customer-success teams",
+    "interview transcription"
+  ],
+  "pros": [
+    "Best-in-class accuracy for English (~95%)",
+    "Auto-joins calendar meetings",
+    "Sales-oriented OtterPilot features"
+  ],
+  "cons": [
+    "Limited to English (other languages beta)",
+    "Free tier capped at 300 min/month",
+    "Editor UI feels dated"
+  ],
+  "features": {
+    "free_tier": true,
+    "auto_join_zoom": true,
+    "auto_join_meet": true,
+    "auto_join_teams": true,
+    "speaker_identification": true,
+    "ai_summary": true,
+    "action_items": true,
+    "api": true
+  },
+  "lastUpdated": "2026-07-15T00:00:00.000Z"
+}

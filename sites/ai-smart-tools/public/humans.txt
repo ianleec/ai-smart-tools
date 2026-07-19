@@ -1,0 +1,12 @@
+/* TEAM */
+  Editor: aismarttools.com editorial
+  Contact: hello@aismarttools.com
+
+/* SITE */
+  Last update: 2026/07/19
+  Language: English
+  Doctype: HTML5
+  Generator: Astro 5
+
+/* THANKS */
+  Built with Astro, Tailwind CSS, and a lot of caffeine.

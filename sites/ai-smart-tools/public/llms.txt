@@ -1,0 +1,36 @@
+# AI Smart Tools
+
+> aismarttools.com
+> An independent, hands-on review site helping readers choose the best AI productivity and workflow tools in 2026. We publish in-depth reviews, head-to-head comparisons, and step-by-step buying guides.
+> 
+> Every review is based on real-world testing. We disclose affiliate relationships and never accept payment for editorial coverage.
+
+## Reviews (Latest)
+- [Best AI Meeting Notes Tools for Remote Teams in 2026](https://aismarttools.com/best/best-ai-meeting-notes-tools-for-remote-teams-2026): Tested 8 tools over 60 days. Top picks for solo founders, distributed teams, and enterprise.
+- [Otter.ai Review: A Real User's 30-Day Test (2026)](https://aismarttools.com/reviews/otter-ai-review-2026): Pricing breakdown, accuracy tests, and 5 honest pros/cons.
+- [Best AI Productivity Tools for Solo Founders in 2026](https://aismarttools.com/best/best-ai-productivity-tools-for-solo-founders-2026): Ranked 12 tools by ROI, learning curve, and integration depth.
+- [Notion AI Review: 30 Days of Real Use](https://aismarttools.com/reviews/notion-ai-review-2026): Honest verdict after a full month of daily use.
+
+## Comparisons
+- [Fireflies vs Otter vs Fathom (2026 Edition)](https://aismarttools.com/compare/fireflies-vs-otter-vs-fathom): Three-way comparison of the leading AI meeting note takers.
+- [Notion vs Obsidian vs Roam (2026)](https://aismarttools.com/compare/notion-vs-obsidian-vs-roam-2026): Which second-brain platform wins for knowledge workers?
+- [Grammarly vs ProWritingAid vs Wordtune (2026)](https://aismarttools.com/compare/grammarly-vs-prowritingaid-vs-wordtune-2026): AI writing assistants compared on accuracy, price, and feature depth.
+- [ClickUp vs Notion vs Asana (2026)](https://aismarttools.com/compare/clickup-vs-notion-vs-asana-2026): PM tool showdown for teams of 5–50.
+
+## Buying Guides
+- [How to Choose an AI Productivity Tool: 7-Step Framework](https://aismarttools.com/guides/how-to-choose-an-ai-productivity-tool): A decision framework with criteria, scoring rubric, and worked examples.
+
+## Categories
+- AI Meeting Notes & Transcription
+- AI Writing Assistants
+- AI Note-Taking & Second Brain
+- AI Task & Project Management
+- AI Email Management
+
+## About
+- [About & Editorial Standards](https://aismarttools.com/about): How we test, score, and rank products.
+- [Affiliate Disclosure](https://aismarttools.com/disclosure): FTC-compliant affiliate disclosure.
+- [Privacy Policy](https://aismarttools.com/privacy)
+
+## Opt-out
+Prefer not to be cited? Email opt-out@aismarttools.com with the URL and we'll add it to our exclusions.

@@ -1,0 +1,135 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import FAQ from '~/components/FAQ.astro';
+import FAQSchema from '~/components/schema/FAQSchema.astro';
+import BreadcrumbSchema from '~/components/schema/BreadcrumbSchema.astro';
+import ReviewSchema from '~/components/schema/ReviewSchema.astro';
+import ItemListSchema from '~/components/schema/ItemListSchema.astro';
+import { formatDate, readingTime } from '~/utils/format';
+import { AFFILIATE_DISCLOSURE_TEXT } from '~/utils/affiliate';
+
+export interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  author?: { name: string; bio?: string; url?: string };
+  category?: string;
+  faqs?: { q: string; a: string }[];
+  breadcrumbs?: { label: string; href: string }[];
+  schema?: 'review' | 'itemlist' | 'none';
+  rating?: number;
+  body: string;
+  updatedLabel?: string;
+}
+
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  author = { name: 'AI Smart Tools Editorial' },
+  category,
+  faqs = [],
+  breadcrumbs = [],
+  schema = 'none',
+  rating,
+  body,
+  updatedLabel,
+} = Astro.props;
+
+const slug = Astro.url.pathname;
+const canonical = new URL(slug, Astro.site).href;
+const wordCount = body.trim().split(/\s+/).length;
+const minutes = readingTime(body);
+const lastUpdated = updatedDate ?? pubDate;
+---
+<BaseLayout
+  title={title}
+  description={description}
+  type="article"
+  publishedTime={pubDate.toISOString()}
+  modifiedTime={lastUpdated.toISOString()}
+  author={author.name}
+  canonical={canonical}
+>
+  {schema === 'review' && (
+    <ReviewSchema 
+      data={{ 
+        title, description, pubDate, updatedDate: lastUpdated,
+        author: author.name, category: (category as any) ?? 'other',
+        product: title.split(':')[0], relatedProducts: [], rating: rating ?? 0,
+        verdict: { winner: '', reason: '' }, faqs: [], affiliate: []
+      }}
+      url={canonical}
+      author={author}
+    />
+  )}
+
+  <article class="container-prose py-12 md:py-16">
+    {breadcrumbs.length > 0 && (
+      <nav class="mb-4 text-sm text-slate-500" aria-label="Breadcrumb">
+        <ol class="flex flex-wrap gap-1">
+          {breadcrumbs.map((crumb, idx) => (
+            <li class="flex items-center gap-1">
+              {idx > 0 && <span>›</span>}
+              <a href={crumb.href} class="hover:text-brand-600">{crumb.label}</a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    )}
+
+    <header class="mb-8 pb-8 border-b border-slate-200">
+      <div class="flex items-center gap-2 text-xs mb-3">
+        {category && (
+          <span class="inline-flex items-center rounded-full bg-brand-100 px-2.5 py-0.5 font-medium uppercase tracking-wide text-brand-800">
+            {category}
+          </span>
+        )}
+        {rating && (
+          <span class="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-0.5 font-medium text-amber-800">
+            ⭐ {rating}/5
+          </span>
+        )}
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-4">
+        {title}
+      </h1>
+      <p class="text-xl text-slate-600 leading-relaxed">
+        {description}
+      </p>
+      
+      <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-slate-500">
+        <div class="flex items-center gap-2">
+          <div class="flex items-center justify-center w-8 h-8 rounded-full bg-slate-200 font-semibold text-slate-700 text-xs">
+            {author.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}
+          </div>
+          <span>By <strong class="text-slate-700">{author.name}</strong></span>
+        </div>
+        <span>📅 Published {formatDate(pubDate)}</span>
+        {updatedDate && updatedDate.getTime() !== pubDate.getTime() && (
+          <span>🔄 Updated {formatDate(updatedDate)}</span>
+        )}
+        <span>⏱️ {minutes} min read ({wordCount.toLocaleString()} words)</span>
+      </div>
+    </header>
+
+    <div class="prose-custom">
+      <slot />
+    </div>
+
+    <aside class="my-10 rounded-lg bg-amber-50 border border-amber-200 p-4 text-sm text-amber-900">
+      <strong>📌 Affiliate Disclosure:</strong> {AFFILIATE_DISCLOSURE_TEXT}
+    </aside>
+
+    {faqs.length > 0 && (
+      <>
+        <FAQ faqs={faqs} />
+        <FAQSchema faqs={faqs} />
+      </>
+    )}
+  </article>
+
+  {breadcrumbs.length > 0 && <BreadcrumbSchema crumbs={breadcrumbs} />}
+</BaseLayout>

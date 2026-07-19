@@ -1,0 +1,28 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const best = await getCollection('best');
+const sorted = best.sort((a, b) => +b.data.pubDate - +a.data.pubDate);
+---
+<BaseLayout
+  title="Best-of Lists 2026 - AI Smart Tools"
+  description="Curated ranked lists of the best AI tools in every category. Updated monthly."
+>
+  <article class="container-wide py-12 md:py-16">
+    <header class="mb-10">
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-3">Best-of Lists 2026</h1>
+      <p class="text-lg text-slate-600">Ranked, scored, and explained. {sorted.length} lists and counting.</p>
+    </header>
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {sorted.map(post => (
+        <a href={'/best/' + post.slug} class="group rounded-xl border border-slate-200 bg-white p-6 hover:border-brand-400 hover:shadow-lg transition">
+          <span class="text-xs font-semibold uppercase tracking-wider text-brand-600 mb-2 block">{post.data.category}</span>
+          <h2 class="font-bold text-lg">{post.data.title}</h2>
+          <p class="text-sm text-slate-600 mt-1 line-clamp-3">{post.data.description}</p>
+        </a>
+      ))}
+    </div>
+    {sorted.length === 0 && <p class="text-center text-slate-500 py-12">First list drops this week.</p>}
+  </article>
+</BaseLayout>

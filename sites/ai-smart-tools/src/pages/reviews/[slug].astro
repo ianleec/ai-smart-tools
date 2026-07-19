@@ -1,0 +1,53 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import ArticleLayout from '~/layouts/ArticleLayout.astro';
+import Verdict from '~/components/Verdict.astro';
+import AffiliateCTA from '~/components/AffiliateCTA.astro';
+
+export async function getStaticPaths() {
+  const reviews = await getCollection('reviews');
+  return reviews.map(review => ({
+    params: { slug: review.slug },
+    props: { review },
+  }));
+}
+
+interface Props {
+  review: CollectionEntry<'reviews'>;
+}
+
+const { review } = Astro.props;
+const { Content } = await review.render();
+const d = review.data;
+---
+<ArticleLayout
+  title={d.title}
+  description={d.description}
+  pubDate={d.pubDate}
+  updatedDate={d.updatedDate}
+  author={{ name: d.author }}
+  category={d.category}
+  rating={d.rating}
+  faqs={d.faqs}
+  schema="review"
+  body={review.body ?? ''}
+  breadcrumbs={[
+    { label: 'Home', href: '/' },
+    { label: 'Reviews', href: '/reviews' },
+    { label: d.title, href: '/reviews/' + review.slug },
+  ]}
+>
+  <Verdict
+    winner={d.verdict.winner}
+    reason={d.verdict.reason}
+    rating={d.rating}
+  />
+  {d.affiliate.length > 0 && (
+    <div class="my-8">
+      {d.affiliate.map(aff => (
+        <AffiliateCTA product={aff.product} cta={aff.cta} url={aff.url} price={aff.price} />
+      ))}
+    </div>
+  )}
+  <Content />
+</ArticleLayout>

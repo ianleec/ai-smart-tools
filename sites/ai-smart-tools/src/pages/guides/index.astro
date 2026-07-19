@@ -1,0 +1,24 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const guides = await getCollection('guides');
+const sorted = guides.sort((a, b) => +b.data.pubDate - +a.data.pubDate);
+---
+<BaseLayout
+  title="Buying Guides and Tutorials - AI Smart Tools"
+  description="Step-by-step guides to choosing, evaluating, and adopting AI productivity tools."
+>
+  <article class="container-wide py-12 md:py-16">
+    <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-3">Buying Guides and Tutorials</h1>
+    <p class="text-lg text-slate-600 mb-10">{sorted.length} guides to help you choose.</p>
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {sorted.map(post => (
+        <a href={'/guides/' + post.slug} class="group rounded-xl border border-slate-200 bg-white p-6 hover:border-brand-400 hover:shadow-lg transition">
+          <h2 class="font-bold text-lg">{post.data.title}</h2>
+        </a>
+      ))}
+    </div>
+    {sorted.length === 0 && <p class="text-center text-slate-500 py-12">First guide coming soon.</p>}
+  </article>
+</BaseLayout>

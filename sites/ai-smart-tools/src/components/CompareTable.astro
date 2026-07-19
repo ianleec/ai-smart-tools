@@ -1,0 +1,54 @@
+---
+export interface Column {
+  key: string;
+  label: string;
+}
+export interface Row {
+  cells: Record<string, string | boolean | number>;
+}
+
+export interface Props {
+  columns: Column[];
+  rows: Row[];
+  highlightCol?: number;
+}
+
+const { columns, rows, highlightCol = 0 } = Astro.props;
+---
+<div class="my-8 overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
+  <table class="w-full text-sm">
+    <thead class="bg-gradient-to-b from-slate-900 to-slate-800 text-white">
+      <tr>
+        {columns.map((col, idx) => (
+          <th
+            class:list={[
+              "px-4 py-3 text-left font-semibold",
+              idx === highlightCol && "bg-brand-600",
+            ]}
+          >
+            {col.label}
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row, rowIdx) => (
+        <tr class:list={["border-t border-slate-200", rowIdx % 2 === 1 && "bg-slate-50"]}>
+          {columns.map((col, colIdx) => (
+            <td
+              class:list={[
+                "px-4 py-3",
+                colIdx === 0 && "font-semibold text-slate-900",
+                colIdx === highlightCol && "bg-brand-50 font-medium",
+              ]}
+            >
+              {typeof row.cells[col.key] === 'boolean' 
+                ? (row.cells[col.key] ? '✅' : '❌')
+                : row.cells[col.key]}
+            </td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

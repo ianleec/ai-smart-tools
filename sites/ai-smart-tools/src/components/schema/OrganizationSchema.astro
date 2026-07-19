@@ -1,0 +1,36 @@
+---
+const orgJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "AI Smart Tools",
+  "url": "https://aismarttools.com",
+  "logo": "https://aismarttools.com/logo.png",
+  "description": "Independent reviews and comparisons of AI productivity and workflow tools.",
+  "sameAs": [
+    "https://twitter.com/aismarttools",
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "hello@aismarttools.com",
+    "contactType": "editorial"
+  }
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "AI Smart Tools",
+  "url": "https://aismarttools.com",
+  "description": "Independent reviews and comparisons of the best AI productivity tools in 2026.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://aismarttools.com/search?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(orgJsonLd)} />
+<script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />

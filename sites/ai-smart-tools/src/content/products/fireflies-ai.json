@@ -1,0 +1,43 @@
+{
+  "name": "Fireflies.ai",
+  "slug": "fireflies-ai",
+  "brand": "Fireflies",
+  "category": "ai-meeting-notes",
+  "url": "https://fireflies.ai",
+  "affiliateUrl": "https://fireflies.ai/?via=aismarttools",
+  "pricing": {
+    "starting": 18,
+    "currency": "USD",
+    "hasFreeTier": true
+  },
+  "rating": 4.5,
+  "g2Score": 4.7,
+  "description": "AI meeting note taker with deep CRM integrations (Salesforce, HubSpot), strong team collaboration features, and a generous free tier.",
+  "bestFor": [
+    "sales teams",
+    "team collaboration and shared note libraries",
+    "CRM-driven workflows"
+  ],
+  "pros": [
+    "Best-in-class CRM integrations",
+    "Free tier includes unlimited transcription",
+    "Strong search across historical notes"
+  ],
+  "cons": [
+    "UI complexity can overwhelm first-time users",
+    "Accuracy drops on heavy accents",
+    "Aggressive enterprise upsells"
+  ],
+  "features": {
+    "free_tier": true,
+    "auto_join_zoom": true,
+    "auto_join_meet": true,
+    "auto_join_teams": true,
+    "speaker_identification": true,
+    "ai_summary": true,
+    "action_items": true,
+    "api": true,
+    "crm_integrations": true
+  },
+  "lastUpdated": "2026-07-15T00:00:00.000Z"
+}

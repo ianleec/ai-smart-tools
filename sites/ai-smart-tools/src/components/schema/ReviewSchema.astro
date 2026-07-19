@@ -1,0 +1,60 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+export interface Props {
+  data: CollectionEntry<'reviews'>['data'];
+  url: string;
+  author: { name: string; bio?: string; url?: string };
+  imageUrl?: string;
+}
+
+const { data, url, author, imageUrl } = Astro.props;
+
+const productName = data.product;
+
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": data.title,
+  "description": data.description,
+  "datePublished": data.pubDate.toISOString(),
+  "dateModified": (data.updatedDate ?? data.pubDate).toISOString(),
+  "author": {
+    "@type": "Person",
+    "name": author.name,
+    ...(author.bio && { description: author.bio }),
+    ...(author.url && { url: author.url }),
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI Smart Tools",
+    "logo": { "@type": "ImageObject", "url": "https://aismarttools.com/logo.png" }
+  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": url },
+  ...(imageUrl && { "image": imageUrl }),
+};
+
+const reviewJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "name": data.title,
+  "reviewBody": data.description,
+  "datePublished": data.pubDate.toISOString(),
+  "dateModified": (data.updatedDate ?? data.pubDate).toISOString(),
+  "author": { "@type": "Person", "name": author.name },
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": data.rating,
+    "bestRating": 5,
+    "worstRating": 0,
+  },
+  "itemReviewed": {
+    "@type": "SoftwareApplication",
+    "name": productName,
+    "applicationCategory": data.category,
+    "operatingSystem": "Web, iOS, Android",
+  },
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
+<script type="application/ld+json" set:html={JSON.stringify(reviewJsonLd)} />

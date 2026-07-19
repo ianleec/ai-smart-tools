@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="80" y="80" width="170" height="170" rx="36" fill="white" opacity="0.95"/>
+  <text x="165" y="200" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="84" fill="#2563eb">AI</text>
+  <text x="295" y="200" font-family="system-ui, sans-serif" font-weight="700" font-size="64" fill="white">SmartTools</text>
+  <text x="80" y="350" font-family="system-ui, sans-serif" font-weight="800" font-size="86" fill="white">Tested, scored, ranked.</text>
+  <text x="80" y="430" font-family="system-ui, sans-serif" font-weight="500" font-size="40" fill="#dbeafe">Independent reviews of the best AI productivity tools.</text>
+  <text x="80" y="560" font-family="system-ui, sans-serif" font-size="32" fill="#bfdbfe">aismarttools.com</text>
+</svg>

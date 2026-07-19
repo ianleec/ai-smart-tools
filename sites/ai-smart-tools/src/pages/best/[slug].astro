@@ -1,0 +1,63 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import ArticleLayout from '~/layouts/ArticleLayout.astro';
+import CompareTable from '~/components/CompareTable.astro';
+import AffiliateCTA from '~/components/AffiliateCTA.astro';
+
+export async function getStaticPaths() {
+  const best = await getCollection('best');
+  return best.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'best'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const d = post.data;
+
+const compareColumns = [
+  { key: 'rank', label: 'Rank' },
+  { key: 'tool', label: 'Tool' },
+  { key: 'bestFor', label: 'Best For' },
+  { key: 'rating', label: 'Rating' },
+];
+const compareRows = d.products.map(p => ({
+  cells: {
+    rank: '#' + p.rank,
+    tool: p.slug,
+    bestFor: p.bestFor,
+    rating: p.rating + '/5',
+  }
+}));
+---
+<ArticleLayout
+  title={d.title}
+  description={d.description}
+  pubDate={d.pubDate}
+  updatedDate={d.updatedDate}
+  author={{ name: d.author }}
+  category={d.category}
+  faqs={d.faqs}
+  schema="itemlist"
+  body={post.body ?? ''}
+  breadcrumbs={[
+    { label: 'Home', href: '/' },
+    { label: 'Best-of', href: '/best' },
+    { label: d.title, href: '/best/' + post.slug },
+  ]}
+>
+  <CompareTable columns={compareColumns} rows={compareRows} highlightCol={1} />
+  <Content />
+  {d.affiliate.length > 0 && (
+    <div class="my-8">
+      {d.affiliate.map(aff => (
+        <AffiliateCTA product={aff.product} cta={aff.cta} url={aff.url} price={aff.price} />
+      ))}
+    </div>
+  )}
+</ArticleLayout>

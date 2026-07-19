@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+export interface Props {
+  data: CollectionEntry<'best'>['data'];
+  url: string;
+}
+
+const { data, url } = Astro.props;
+
+const listJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": data.title,
+  "description": data.description,
+  "url": url,
+  "itemListOrder": "https://schema.org/ItemListOrderAscending",
+  "numberOfItems": data.products.length,
+  "itemListElement": data.products.map((p, idx) => ({
+    "@type": "ListItem",
+    "position": idx + 1,
+    "item": {
+      "@type": "SoftwareApplication",
+      "name": p.slug,
+      "description": p.bestFor,
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": p.rating,
+        "bestRating": 5,
+      },
+    },
+  })),
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(listJsonLd)} />

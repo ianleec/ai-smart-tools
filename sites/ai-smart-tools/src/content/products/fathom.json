@@ -1,0 +1,42 @@
+{
+  "name": "Fathom",
+  "slug": "fathom",
+  "brand": "Fathom",
+  "category": "ai-meeting-notes",
+  "url": "https://fathom.video",
+  "affiliateUrl": "https://fathom.video/?via=aismarttools",
+  "pricing": {
+    "starting": 24,
+    "currency": "USD",
+    "hasFreeTier": true
+  },
+  "rating": 4.8,
+  "g2Score": 4.7,
+  "description": "AI meeting note taker renowned for accuracy and a frictionless UX; popular with individual professionals and small teams.",
+  "bestFor": [
+    "individual knowledge workers",
+    "small teams valuing simplicity",
+    "non-English meetings"
+  ],
+  "pros": [
+    "Highest accuracy across languages",
+    "Single-click UX, no learning curve",
+    "GDPR-friendly; never trains on your data"
+  ],
+  "cons": [
+    "Fewer CRM integrations than Fireflies",
+    "No speaker-diarization labels on the free tier",
+    "Limited Slack/Notion integrations"
+  ],
+  "features": {
+    "free_tier": true,
+    "auto_join_zoom": true,
+    "auto_join_meet": true,
+    "auto_join_teams": true,
+    "speaker_identification": true,
+    "ai_summary": true,
+    "action_items": true,
+    "gdpr_compliant": true
+  },
+  "lastUpdated": "2026-07-15T00:00:00.000Z"
+}

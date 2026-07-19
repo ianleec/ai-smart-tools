@@ -1,0 +1,89 @@
+# ============================================================
+# robots.txt for aismarttools.com
+# GEO strategy: explicitly allow major AI crawlers.
+# Last updated: 2026-07
+# ============================================================
+
+# ---- OpenAI / ChatGPT ----
+User-agent: GPTBot
+Allow: /
+
+User-agent: GPTBot-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# ---- Anthropic / Claude ----
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# ---- Perplexity ----
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# ---- Google (matters for Gemini / AI Overviews) ----
+User-agent: Google-Extended
+Allow: /
+
+# ---- Apple Intelligence ----
+User-agent: Applebot-Extended
+Allow: /
+
+# ---- Common Crawl (used by most LLM training) ----
+User-agent: CCBot
+Allow: /
+
+# ---- Amazon (Alexa / Rufus) ----
+User-agent: Amazonbot
+Allow: /
+
+# ---- Meta ----
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+# ---- Microsoft Copilot / Bing AI ----
+User-agent: MSNBot-Media
+Allow: /
+
+# ---- Mistral ----
+User-agent: MistralAI-User
+Allow: /
+
+# ---- Cohere ----
+User-agent: cohere-ai
+Allow: /
+
+# ---- Diffbot (knowledge graph) ----
+User-agent: Diffbot
+Allow: /
+
+# ---- You.com ----
+User-agent: YouBot
+Allow: /
+
+# ---- Default ----
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /*.json$
+
+# ---- Sitemaps ----
+Sitemap: https://aismarttools.com/sitemap-index.xml
+Sitemap: https://aismarttools.com/sitemap-0.xml

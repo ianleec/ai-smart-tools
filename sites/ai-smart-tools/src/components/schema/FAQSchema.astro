@@ -1,0 +1,28 @@
+---
+export interface FAQ {
+  q: string;
+  a: string;
+}
+
+export interface Props {
+  faqs: FAQ[];
+}
+
+const { faqs } = Astro.props;
+
+if (faqs.length === 0) return null;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(f => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.a,
+    },
+  })),
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

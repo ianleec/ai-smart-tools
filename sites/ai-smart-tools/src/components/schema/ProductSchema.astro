@@ -1,0 +1,54 @@
+---
+export interface Props {
+  product: {
+    name: string;
+    description: string;
+    brand: string;
+    price: { starting: number; currency: string; hasFreeTier: boolean };
+    rating: number;
+    g2Score?: number;
+    url: string;
+    affiliateUrl?: string;
+    lastUpdated: Date;
+  };
+}
+
+const { product } = Astro.props;
+
+const offer: any = {
+  "@type": "Offer",
+  "price": product.price.starting,
+  "priceCurrency": product.price.currency,
+  "url": product.affiliateUrl ?? product.url,
+};
+
+if (product.price.hasFreeTier) {
+  offer.priceSpecification = {
+    "@type": "PriceSpecification",
+    "priceCurrency": product.price.currency,
+    "price": 0,
+    "description": "Free tier available",
+  };
+}
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": product.name,
+  "description": product.description,
+  "brand": { "@type": "Brand", "name": product.brand },
+  "url": product.url,
+  ...(product.g2Score !== undefined && {
+    aggregateRating: {
+      "@type": "AggregateRating",
+      "ratingValue": product.rating,
+      "bestRating": 5,
+      "worstRating": 0,
+      "reviewCount": 100, // placeholder
+    },
+  }),
+  "offers": offer,
+  "dateModified": product.lastUpdated.toISOString(),
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

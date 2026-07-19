@@ -1,0 +1,105 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import OrganizationSchema from '~/components/schema/OrganizationSchema.astro';
+
+const reviews = await getCollection('reviews');
+const best = await getCollection('best');
+const compare = await getCollection('compare');
+
+const featuredBest = best.sort((a, b) => +b.data.pubDate - +a.data.pubDate).slice(0, 3);
+const recentReviews = reviews.sort((a, b) => +b.data.pubDate - +a.data.pubDate).slice(0, 3);
+const recentCompare = compare.sort((a, b) => +b.data.pubDate - +a.data.pubDate).slice(0, 3);
+
+const categories = [
+  { name: 'AI Meeting Notes', desc: 'Otter, Fireflies, Fathom & more', href: '/best?category=meeting-notes' },
+  { name: 'AI Writing', desc: 'Grammarly, Jasper, Writesonic', href: '/best?category=writing' },
+  { name: 'AI Note-Taking', desc: 'Notion AI, Mem, Obsidian', href: '/best?category=note-taking' },
+  { name: 'AI Task & PM', desc: 'ClickUp, Notion, Asana', href: '/best?category=task-management' },
+  { name: 'AI Email', desc: 'Superhuman, SaneBox', href: '/best?category=email' },
+  { name: 'AI Research', desc: 'Elicit, Consensus, Perplexity', href: '/best?category=research' },
+];
+---
+<BaseLayout
+  title="AI Smart Tools — Best AI Productivity Tools in 2026"
+  description="Independent, hands-on reviews of the best AI productivity and workflow tools in 2026. Tested, scored, ranked. Updated weekly."
+>
+  <OrganizationSchema />
+  
+  <section class="bg-gradient-to-b from-brand-50 to-white">
+    <div class="container-wide py-16 md:py-24 text-center max-w-4xl">
+      <span class="inline-flex items-center rounded-full bg-brand-100 px-3 py-1 text-sm font-medium text-brand-800 mb-4">
+        Updated weekly · July 2026
+      </span>
+      <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-slate-900 mb-6">
+        The best <span class="text-brand-600">AI productivity tools</span>, tested by humans.
+      </h1>
+      <p class="text-xl text-slate-600 leading-relaxed mb-8 max-w-2xl mx-auto">
+        Independent reviews, head-to-head comparisons, and step-by-step buying guides 
+        for the AI tools that actually ship work. No fluff. No filler.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="/best" class="inline-flex items-center justify-center rounded-lg bg-brand-600 px-5 py-3 text-base font-semibold text-white hover:bg-brand-700 transition shadow-md">
+          Browse Best-of Lists
+        </a>
+        <a href="/reviews" class="inline-flex items-center justify-center rounded-lg border border-slate-300 px-5 py-3 text-base font-semibold text-slate-700 hover:bg-slate-50 transition">
+          All Reviews
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-wide py-16">
+    <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Browse by category</h2>
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {categories.map(cat => (
+        <a href={cat.href} class="group rounded-xl border border-slate-200 bg-white p-5 hover:border-brand-400 hover:shadow-md transition">
+          <h3 class="font-bold text-slate-900 group-hover:text-brand-700 mb-1">{cat.name}</h3>
+          <p class="text-sm text-slate-600">{cat.desc}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  {featuredBest.length > 0 && (
+    <section class="container-wide py-12">
+      <div class="flex items-end justify-between mb-6">
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900">Editor's picks</h2>
+        <a href="/best" class="text-brand-600 hover:text-brand-700 font-medium">View all →</a>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {featuredBest.map(post => (
+          <a href={`/best/${post.slug}`} class="group rounded-xl border border-slate-200 bg-white p-6 hover:border-brand-400 hover:shadow-lg transition flex flex-col">
+            <span class="text-xs font-semibold uppercase tracking-wider text-brand-600 mb-2">{post.data.category}</span>
+            <h3 class="font-bold text-lg text-slate-900 group-hover:text-brand-700 mb-2 leading-snug">{post.data.title}</h3>
+            <p class="text-sm text-slate-600 flex-1">{post.data.description}</p>
+            <div class="mt-4 text-xs text-slate-500">
+              {post.data.products.length} tools ranked · {post.data.faqs.length} FAQs
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {recentReviews.length > 0 && (
+    <section class="container-wide py-12">
+      <div class="flex items-end justify-between mb-6">
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900">Latest reviews</h2>
+        <a href="/reviews" class="text-brand-600 hover:text-brand-700 font-medium">View all →</a>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {recentReviews.map(post => (
+          <a href={`/reviews/${post.slug}`} class="group rounded-xl border border-slate-200 bg-white p-6 hover:border-brand-400 hover:shadow-lg transition">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-xs font-semibold uppercase tracking-wider text-brand-600">{post.data.category}</span>
+              <span class="text-xs text-amber-600">⭐ {post.data.rating}/5</span>
+            </div>
+            <h3 class="font-bold text-lg text-slate-900 group-hover:text-brand-700 leading-snug">{post.data.title}</h3>
+            <p class="text-sm text-slate-600 mt-1">{post.data.description}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+</BaseLayout>

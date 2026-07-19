@@ -1,0 +1,6 @@
+# Mono-repo ignores one specific noise; per-site ignores live in each site/
+.DS_Store
+*.swp
+.vscode/
+.idea/
+.claude/

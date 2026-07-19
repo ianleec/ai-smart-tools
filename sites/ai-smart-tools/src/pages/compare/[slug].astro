@@ -1,0 +1,42 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import ArticleLayout from '~/layouts/ArticleLayout.astro';
+import Verdict from '~/components/Verdict.astro';
+
+export async function getStaticPaths() {
+  const compare = await getCollection('compare');
+  return compare.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'compare'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const d = post.data;
+---
+<ArticleLayout
+  title={d.title}
+  description={d.description}
+  pubDate={d.pubDate}
+  updatedDate={d.updatedDate}
+  author={{ name: d.author }}
+  category={d.category}
+  faqs={d.faqs}
+  body={post.body ?? ''}
+  breadcrumbs={[
+    { label: 'Home', href: '/' },
+    { label: 'Comparisons', href: '/compare' },
+    { label: d.title, href: '/compare/' + post.slug },
+  ]}
+>
+  <Verdict
+    winner={d.verdict.winner}
+    reason={d.verdict.reason}
+  />
+  <Content />
+</ArticleLayout>
