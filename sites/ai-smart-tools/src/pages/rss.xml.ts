@@ -24,8 +24,8 @@ export async function GET(context: { site: URL | undefined }) {
         title: post.data.title,
         description: post.data.description,
         pubDate: post.data.pubDate,
-        link: `/${post.kind}/${post.slug}/`,
-        categories: [post.data.category ?? 'general'],
+        link: `/${(post.kind === 'review' ? 'reviews' : post.kind)}/${post.slug}`,
+        categories: [(post.data as any).category ?? 'general'],
       })),
     customData: '<language>en-us</language>',
   });
